@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Client</title>
+
+    <style>
+        
+        body{
+            margin:0;
+            padding:0;
+            display:grid;
+            grid-template-rows: 2fr 1fr;
+            width:100vw;
+            height: 100vh;
+        }
+
+
+
+        .ui-wrapper{
+            padding: 1em;
+            background-color: wheat;
+            
+            display:flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+    
+        }
+      
+
+        .ui-wrapper > div{
+            padding: 1em;
+
+            background-color: #333C3E;
+            box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+            
+
+        
+
+            border-radius:0.25em ;
+            flex: 1 1 auto;
+            margin: 1%;
+
+            
+        }
+
+        form{
+            display: flex;
+            flex-flow:column nowrap;
+
+            margin: 2px solid red;
+           
+
+            height: 100%;
+            
+            
+        }
+
+        button{
+            color: #494949 !important;
+	    text-transform: uppercase;
+	    text-decoration: none;
+	    background: #ffffff;
+	    padding: 20px;
+	    border: 4px solid #494949 !important;
+	    display: inline-block;
+
+        font-size: 17px;
+        font-family: 'Open Sans';
+        line-height: 1.9;
+
+        margin-top:auto;
+
+        }
+
+        input{
+            padding: 0.7em;
+            margin: 1em 0.3em;
+
+            background: none;
+            border:0;
+            border-bottom: solid 1px palegoldenrod;
+
+            color:white;
+        }
+
+        .result-wrapper{
+            padding: 1em;
+            background-color: #F0EFEE;
+        }
+
+        .statusWrap{
+
+            background-color: red;
+
+        }
+
+        .bodyDisplay{
+            background-color: yellow;
+
+        }
+
+
+      
+
+    </style>
+
+    <script src='./requestHandler.js' defer></script>
+</head>
+<body>
+
+
+ 
+    <div class="ui-wrapper">
+
+        <div>
+
+            <form id ='find'>
+
+                
+                <input type="number" id="chId" name="chId" min='0' placeholder="Enter ID (or leave blank to fetch all)">
+                
+        
+                <button>Fetch </button>
+
+            </form>
+        </div>
+
+        <div>
+            <form id ='add' >
+
+                <input type="text" id="chName" name="chName" placeholder="Name" required>
+                <input type="text" id="chOrigin" name="chOrigin" placeholder="Country of Origin" required>
+                <input type="text" id="chHeat" name="chHeat" placeholder="Heat" required>
+
+
+                <button>Add </button>
+            </form>
+            
+        </div>
+        <div>
+            <form id ='update' name ='update'> 
+                <form >
+                <input type="number" id="chId" name="chId" min='0' placeholder="Enter ID " required>
+                <input type="text" id="chName" name="chName" placeholder="Name" required>
+                <input type="text" id="chOrigin" name="chOrigin" placeholder="Country of Origin" required>
+                <input type="text" id="chHeat" name="chHeat" placeholder="Heat" required>
+                <button>Update </button>
+            </form>
+        </div>
+        <div>
+            <form id ='remove'>
+
+                <input type="number" id="chId" name="chId" min='0' placeholder="Enter ID">
+                
+                <button>Delete </button>
+            </form>
+        </div>
+        
+
+    </div>
+
+    <div class="result-wrapper">
+        <h3>Returned Request </h3>
+        <div class="statusWrap"> Status : <span class="status">  Here</span> </div>
+        
+        <div class="bodyDisplay">
+            Body goes here
+        </div>
+        </div>
+
+
+
+
+   
+    
+</body>
+</html>
+
+
+
+<!-- 
+    To-Do
+    Add buttons
+    Add form elements
+    Create client side requests for - get chillies ( indivual and all), add chilli, update chilli, delete chilli
+    Result Display
+
+    Server Side Stuff
+
+
+
+ -->
