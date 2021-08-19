@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3001/chillies/'
+const baseUrl = window.location.origin + '/chillies/';
 const requestMap = {
 
     fetch : 'GET',
