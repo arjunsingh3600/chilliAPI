@@ -1,119 +1,75 @@
-const { response } = require('express');
-var express = require('express');
+var express = require("express");
 
-
+var cors = require("cors");
 var app = express();
-
+app.use(cors());
 app.use(express.json());
-app.use(express.static('public'))
 
+var chillies = [];
 
-var chillies =[
-    {
-        id:'1',
-        name: 'jalapeno'
-    },
-    {
-        id:'2',
-        name: 'ancho'
-    },
-    {
-        id:'3',
-        name: 'bhoot'
-    }   
-    
-];
-
-
-
-app.get('/', function(req, res) {
-    res.sendFile('./index.html', {root: __dirname })
+app.get("/chillies", (req, res) => {
+  res.send(chillies);
+  console.log("get all chillies");
 });
 
+app.get("/chillies/:id", (req, res) => {
+  console.log(`getting a chilli with id ${req.params.id}`);
 
+  // check if a chilli with matching id was found
+  var chilliMatch = chillies.find((c) => c.id == req.params.id);
 
-app.get('/chillies',(req,res)=>{
+  // if no id was found send chilliMatch will be undefined which is falsy
 
-    res.send(chillies);
-
-    console.log('get all chillies');
-
+  if (chilliMatch) {
+    res.send(chilliMatch);
+  } else {
+    res
+      .sendStatus(400);
+  }
 });
 
+app.post("/chillies", (req, res) => {
+  console.log("adding a chilli");
 
-app.get('/chillies/:id',(req,res)=>{
+  // check if new chilli object is not empty
 
+  const newChilli = { ...req.body, id: chillies.length };
 
-    chillies.forEach(c => {
-
-        if (c.id==req.params.id){
-            res.send(c); 
-        }
-    });
-
-
-   
-    console.log(`get a chilli with id ${req.params.id}`);
-
+  chillies.push(newChilli);
+  res.send(newChilli);
 });
 
+app.put("/chillies/:id", (req, res) => {
+  var chilliIndex = chillies.findIndex((c) => c.id == req.params.id);
 
-app.post('/chillies',(req,res)=>{
-    
+  // if no id was found send chilliMatch will be undefined which is falsy
 
-
-    const newChilli = { ...req.body, id:chillies.length + 1};
-
-    
-
-    chillies.push(newChilli);
-    
-    res.send(newChilli);
-    console.log(req.body);
-
-   console.log('add a chilli');
-
+  if (chilliIndex != -1) {
+    chillies[chilliIndex] = req.body;
+  } else {
+    res
+      .sendStatus(400);
+  }
 });
 
+app.delete("/chillies/:id", (req, res) => {
+  console.log(`delete a chilli with id ${req.params.id}`);
 
-app.put('/chillies/:id',(req,res)=>{
+  let deletedChilli = chillies.find((c) => c.id == req.params.id);
 
-
-    chillies = chillies.map ( c => {
-
-        if (c.id == req.params.id){
-            console.log(`update a chilli with id ${req.params.id}`);
-           
-           return req.body;
-           res.send(c);
-
-
-        }else{
-            return c;
-            
-        }
-
-    });
-
-   
-    
-    
-});
-
-app.delete('/chillies/:id',(req,res)=>{
-
-
-    let deletedChilli = chillies.find(c => c.id == req.params.id);
-
-    chillies = chillies.filter ( c => c.id != req.params.id );
-    
+  if (!deletedChilli) {
+    res
+      .sendStatus(400)
+  } else {
+    chillies = chillies.filter((c) => c.id != req.params.id);
     res.send(deletedChilli);
-
-    console.log(`delete a chilli with id ${req.params.id}`);
-    
+  }
 });
 
+app.use("/*", (req, res) => { 
+  res.sendStatus("404");
+});
 
 app.listen(3001, () => {
-    console.log('listening on port 3001');
-  });
+  console.log("listening on port 3001");
+});

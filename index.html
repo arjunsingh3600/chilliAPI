@@ -15,13 +15,14 @@
             grid-template-rows: 2fr 1fr;
             width:100vw;
             height: 100vh;
+            font-family: sans-serif;
+            background-color: #84a78d;
         }
 
 
 
         .ui-wrapper{
             padding: 1em;
-            background-color: wheat;
             
             display:flex;
             flex-flow: row wrap;
@@ -50,9 +51,6 @@
             display: flex;
             flex-flow:column nowrap;
 
-            margin: 2px solid red;
-           
-
             height: 100%;
             
             
@@ -67,8 +65,7 @@
 	    border: 4px solid #494949 !important;
 	    display: inline-block;
 
-        font-size: 17px;
-        font-family: 'Open Sans';
+        font-size: 1rem;
         line-height: 1.9;
 
         margin-top:auto;
@@ -88,19 +85,23 @@
 
         .result-wrapper{
             padding: 1em;
-            background-color: #F0EFEE;
         }
 
-        .statusWrap{
-
-            background-color: red;
-
+        .statusDisplay{
+            padding: 1em;
+            
+        }   
+        .result-content{
+            background-color: azure;
+            border-radius: 1em;
+            
         }
 
         .bodyDisplay{
-            background-color: yellow;
+            padding: 1em;
 
         }
+
 
 
       
@@ -132,7 +133,7 @@
             <form id ='add' >
 
                 <input type="text" id="chName" name="chName" placeholder="Name" required>
-                <input type="text" id="chOrigin" name="chOrigin" placeholder="Country of Origin" required>
+                <input type="text" id="chOrigin" name="chOrigin" placeholder="Country of Origin"  required>
                 <input type="text" id="chHeat" name="chHeat" placeholder="Heat" required>
 
 
@@ -163,13 +164,17 @@
     </div>
 
     <div class="result-wrapper">
-        <h3>Returned Request </h3>
-        <div class="statusWrap"> Status : <span class="status">  Here</span> </div>
+        <div class ="result-content">
+
+        
+        <div class="statusDisplay"> Status : <span class="response-status"> Here </span> </div>
         
         <div class="bodyDisplay">
-            Body goes here
+            Body :
+            <span class="response-body"> Here </span>
         </div>
         </div>
+    </div>
 
 
 
@@ -181,15 +186,3 @@
 
 
 
-<!-- 
-    To-Do
-    Add buttons
-    Add form elements
-    Create client side requests for - get chillies ( indivual and all), add chilli, update chilli, delete chilli
-    Result Display
-
-    Server Side Stuff
-
-
-
- -->
